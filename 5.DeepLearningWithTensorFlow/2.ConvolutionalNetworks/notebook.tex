@@ -1,0 +1,1524 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{ML0120EN-2.1-Review-Understanding\_Convolutions}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+     UNDERSTANDING CONVOLUTIONS
+
+    \subsection{Introduction}\label{introduction}
+
+    \subsubsection{Lesson}\label{lesson}
+
+In this lesson, we will learn more about the key concepts behind the
+CNNs (Convolutional Neural Networks from now on). This lesson is not
+intended to be a reference for \emph{machine learning, deep learning,
+convolutions or TensorFlow}. The intention is to give notions to the
+user about these fields.
+
+\subsubsection{Audience}\label{audience}
+
+\begin{itemize}
+\item
+  Data scientists. General public related to computer science and
+  machine learning.
+\item
+  Readers interested on TensorFlow and in need of a cloud platform like
+  Workbench Data Scientist.
+\end{itemize}
+
+\subsubsection{Pre-requisites:}\label{pre-requisites}
+
+Basic knowledge of linear algebra, Python, Neural Networks and
+TensorFlow.
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \subsection{Table of contents}\label{table-of-contents}
+
+Clik on the links to see the sections: -
+
+Analogies
+
+\begin{itemize}
+\item
+  Understanding and coding with Python
+\item
+  Coding with TensorFlow
+\item
+  Convolution applied on images
+\item
+  Conclusion
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+     \# Analogies
+
+There are several ways to understand Convolutional Layers without using
+a mathematical approach. We are going to explore some of the ideas
+proposed by the Machine Learning community.
+
+\subsubsection{Instances of Neurons}\label{instances-of-neurons}
+
+When you start to learn a programming language, one of the first phases
+of your development is the learning and application of functions.
+Instead of rewriting pieces of code everytime that you would, a good
+student is encouraged to code using functional programming, keeping the
+code organized, clear and concise. CNNs can be thought of as a
+simplification of what is really going on, a special kind of neural
+network which uses identical copies of the same neuron. These copies
+include the same parameters (shared weights and biases) and activation
+functions.
+
+    \subsubsection{Location and type of
+connections}\label{location-and-type-of-connections}
+
+In a fully connected layer NN, each neuron is connected to every neuron
+in the previous layer, and each connection has it's own weight. This is
+a totally general purpose connection pattern and makes no assumptions
+about the features in the input data thus not using any advantage that
+the knowledge of the data being used can bring. These types of layers
+are also very expensive in terms of memory and computation.
+
+In contrast, in a convolutional layer each neuron is only connected to a
+few nearby local neurons in the previous layer, and the same set of
+weights is used to connect to them. For example, in the following image,
+the neurons in the h1 layer are connected only to some input units
+(pixels).
+
+A figure presented in one of Lecun's papers. It shows the spatial
+relation and how the connections are modified until the output layer
+\href{http://help.sketchup.com/en}{{[}ref{]}} 
+
+    \subsubsection{Feature Learning}\label{feature-learning}
+
+Feature engineering is the process of extracting useful patterns from
+input data that will help the prediction model to understand better the
+real nature of the problem. A good feature learning will present
+patterns in a way that increase significantly the accuracy and
+performance of the applied machine learning algorithms in a way that
+would be impossible or too expensive by the machine learning itself.
+
+Feature learning algorithms find the common patterns that are important
+to distinguish between the wanted classes and extract them
+automatically. After this process, they are ready to be used in a
+classification or regression problem.
+
+The great advantage of CNNs is that they are uncommonly good at finding
+features in images that grow after each level, resulting in high-level
+features in the end. The final layers (can be one or more) use all these
+generated features for classification or regression.
+
+Basically, Convolutional Neural Networks are your best friend today to
+\textbf{automatically do Feature Engineering} (Feature Learning) without
+wasting too much time creating your own codes and with no need of
+expertise in the field of Feature Engineering.
+
+Example of feature learning (automatically feature engineering),
+starting with simple features and ending with high-level features like
+human faces.
+\href{https://devblogs.nvidia.com/parallelforall/deep-learning-nutshell-core-concepts/}{{[}ref{]}}
+
+    \subsubsection{Image Filter}\label{image-filter}
+
+\textbf{How to create a convolved freature from an image ?}\\
+The image below is a 8x8 matrix of an image's pixels, converted to sing
+binary values in the next image(left), where 1 means a white pixel and 0
+a black pixel. Later we will find out that typically this is a
+normalization, these values can actually have different scales. The most
+commmon usage is values between 0 and 255 for 8-bit grayscale images.
+
+An example of a low resolution image to be recognized.
+\href{http://help.sketchup.com/en}{{[}ref{]}}
+
+In the below image, with an animation, you can see how the
+two-dimensional convolution operation would operate on the images. This
+operation is performed in most of the Deep Learning frameworks in their
+first phase. We need a sliding windows to create the convolved matrix:
+
+\$ kernel=
+
+\begin{bmatrix}
+     1          & 0      & 1     \\
+     0          & 1    & 0     \\
+     1          & 0    & 1
+\end{bmatrix}
+
+\textbackslash{} \$
+
+The sliding window (a.k.a kernel, filter or feature detector) with a
+preset calculation ({[}{[}x1, x0,x1{]}, {[}x0,x1,x0{]},
+{[}x1,x0,x1{]}{]}) goes through the image and creates a new matrix
+(feature map).
+
+    Animations showing how a kernel interact with a matrix representing an
+image. \href{http://cs231n.github.io/convolutional-networks/}{{[}ref{]}}
+
+In the example above we used a 3×3 filter (5x5 could also be used, but
+would be too complex). The values from the filter were multiplied
+element-wise with the original matrix (input image), then summed up. To
+get the full convolved matrix, the algorithm keep repeating this small
+procedure for each element by sliding the filter over the whole original
+matrix.
+
+    Illustration of the operation for one position of the kernel.
+\href{http://colah.github.io/posts/2014-07-Understanding-Convolutions/}{{[}ref{]}}
+
+Just like the referenced example, we can think of a one-dimensional
+convolution as sliding function (1x1 or 1x2 filter) multiplying and
+adding on top of an array (1 dimensional array, instead of the original
+matrix).
+
+\textbf{What is the output of applying a kernel on an image?}\\
+The famous GIMP (Open Source Image Editor) has an explanation about the
+convolution operation applied to images that can help us understand how
+Neural Networks will interact with this tool.
+
+    Applying the left kernel to the image will result into a blurr effect.
+\href{http://colah.github.io/posts/2014-07-Understanding-Convolutions/}{{[}ref{]}}
+
+Well, this is very good if you want nice effects for your social media
+photos, but in the field of computer vision you need detailed patterns
+(remember feature learning) that are almost erased using a kernel like
+that. A more suitable example would be the Kernel/filter that shows
+edges from photos (the first recognizable feature of an image).
+
+\textbf{Lets try another kernel: }\\
+Taking the values −1 and 1 on two adjacent pixels and zero everywhere
+else for the kernel, result in the following image. That is, we subtract
+two adjacent pixels. When side by side pixels are similar, this gives us
+approximately zero. On edges, however, adjacent pixels are very
+different in the direction perpendicular to the edge. Knowing that
+results distant from zero will result in brighter pixels, you can
+already guess the result of this type of kernel.
+
+    Applying the new left kernel to the image will result into a edge
+detection, this output is normallly useful for the initial layers of a
+CNN.
+\href{http://colah.github.io/posts/2014-07-Understanding-Convolutions/}{{[}ref{]}}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+     \# Understanding and coding with Python
+
+    \subsection{Convolution: 1D operation with Python
+(Numpy/Scipy)}\label{convolution-1d-operation-with-python-numpyscipy}
+
+    \subsubsection{Mathematical notation}\label{mathematical-notation}
+
+In this first example, we will use the pure mathematical notation. Here
+we have a one dimensional convolution operation. Lets say h is our image
+and x is our kernel:
+
+x{[}i{]} = \{ 3, 4, 5 \}\\
+h{[}i{]} = \{ 2, 1, 0 \}
+
+where i = index
+
+To use the convolution operation between the two arrays try the code
+below to see how it's easy to do in Python.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        
+        \PY{n}{h} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}
+         
+        
+        \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{convolve}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{h}\PY{p}{)}
+        \PY{n}{y}  
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} array([ 6, 11, 14,  5,  0])
+\end{Verbatim}
+            
+    sliding x window over h:\\
+- 6 = 2*3\\
+- 11 = 1*3 + 2*4\\
+- 14 = 0*3 + 1*4 + 2*5\\
+- 5 = 0*4 + 1*5\\
+- 0 = 0*5
+
+    \paragraph{Now we are going to verify what Python did, because we don't
+trust computer outputs while we are learning. Using the equation of
+convolution for
+y{[}n{]}:}\label{now-we-are-going-to-verify-what-python-did-because-we-dont-trust-computer-outputs-while-we-are-learning.-using-the-equation-of-convolution-for-yn}
+
+\[y[n] = \sum x[k] \cdot h[n-k] \]
+
+And then, executing manually the computation:
+
+\$ y{[}0{]}=
+\sum\limits\emph{\{k\to\infty\}\^{}\infty x{[}k{]}\cdot h{[}0-k{]}=
+x{[}0{]}\cdot h{[}0{]}=3\cdot 2=6 \textbackslash{} y{[}1{]}=
+\sum\limits}\{k\to\infty\}\^{}\infty x{[}k{]}\cdot h{[}1-k{]}=
+x{[}0{]}\cdot h{[}1-0{]}+x{[}1{]}\cdot h{[}1-1{]} + \space...
+\textbackslash{} \qquad\qquad\qquad\qquad\qquad   =
+x{[}0{]}\cdot h{[}1{]} + x{[}1{]}\cdot h{[}0{]}= 3\cdot1+4\cdot 2=11
+\textbackslash{} y{[}2{]}=
+\sum\limits\emph{\{k\to\infty\}\^{}\infty x{[}k{]}\cdot h{[}2-k{]}=
+x{[}0{]}\cdot h{[}2-0{]}+x{[}1{]}\cdot h{[}2-1{]}+x{[}2{]}\cdot h{[}2-2{]}+
+\space ... \textbackslash{} \qquad\qquad\qquad\qquad\qquad   =
+x{[}0{]}\cdot h{[}2{]} + x{[}1{]}\cdot h{[}1{]}+x{[}2{]}\cdot h{[}0{]}=
+3\cdot0+4\cdot 1 +5\cdot 2=14 \textbackslash{} y{[}3{]}=
+\sum\limits}\{k\to\infty\}\^{}\infty x{[}k{]}\cdot h{[}3-k{]}=
+x{[}0{]}\cdot h{[}3-0{]}+x{[}1{]}\cdot h{[}3-1{]}+x{[}2{]}\cdot h{[}3-2{]}+
+x{[}3{]}\cdot h{[}3-3{]} + \space... \textbackslash{}
+\qquad\qquad\qquad\qquad\qquad   = x{[}0{]}\cdot h{[}3{]}
++x{[}1{]}\cdot h{[}2{]}\cdot +
+x{[}2{]}\cdot h{[}1{]}+x{[}3{]}\cdot h{[}0{]}=0+0+5 \cdot 1 +0=5
+\textbackslash{} y{[}4{]}=
+\sum\limits\_\{k\to\infty\}\^{}\infty x{[}k{]}\cdot h{[}4-k{]}=
+x{[}0{]}\cdot h{[}4-0{]}+x{[}1{]}\cdot h{[}4-1{]}+x{[}2{]}\cdot h{[}4-2{]}+\space...
+=0\textbackslash{} \$
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Compare with the following values from Python: y[0] = }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s2}{ ; y[1] = }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s2}{; y[2] = }\PY{l+s+si}{\PYZob{}2\PYZcb{}}\PY{l+s+s2}{; y[3] = }\PY{l+s+si}{\PYZob{}3\PYZcb{}}\PY{l+s+s2}{; y[4] = }\PY{l+s+si}{\PYZob{}4\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{y}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{y}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{n}{y}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}\PY{n}{y}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Compare with the following values from Python: y[0] = 6 ; y[1] = 11; y[2] = 14; y[3] = 5; y[4] = 0
+
+    \end{Verbatim}
+
+    There are three methods to apply kernel on the matrix, \textbf{with
+padding (full)}, \textbf{with padding(same)} and \textbf{without
+padding(valid)}:
+
+\subsubsection{1) Visually understanding the operation with padding
+(full)}\label{visually-understanding-the-operation-with-padding-full}
+
+Lets think of the kernel as a sliding window. We have to come with the
+solution of padding zeros on the input array. Ths is a very famous
+implementation and will be easier to show how it works with a simple
+example, consider this case:
+
+x{[}i{]} = {[}6,2{]}\\
+h{[}i{]} = {[}1,2,5,4{]}
+
+    Using the zero padding, we can calculate the convolution.
+
+You have to invert the filter x, otherwise the operation would be
+cross-correlation. First step, (now with zero padding):
+[2  6]
+ |  |
+ V  V
+ 0 [1 2 5 4]
+    = 2 * 0 + 6 * 1 = 6
+
+Second step:
+  [2  6]  
+   |  |  
+   V  V  
+0 [1  2  5  4]  
+    = 2 * 1 + 6 * 2 = 14 (the arrows represent the connection between the
+kernel and the input)
+
+Third step:
+     [2  6]  
+      |  |  
+      V  V  
+0 [1  2  5  4]  
+    = 2 * 2 + 6 * 5 = 34
+
+Fourth step:
+        [2  6]
+         |  |
+         V  V
+0 [1  2  5  4]  
+    = 2 * 5 + 6 * 4 = 34
+
+Fifth step:
+           [2  6]
+            |  |
+            V  V
+0 [1  2  5  4] 0  
+    = 2 * 4 + 6 * 0 = 8
+
+The result of the convolution for this case, listing all the steps,
+would then be: Y = {[}6 14 34 34 8{]}
+
+Below we verify with numpy:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        
+        \PY{n}{x}\PY{o}{=} \PY{p}{[}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}
+        \PY{n}{h}\PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{]}
+        
+        \PY{n}{y}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{convolve}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{h}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{full}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{}now, because of the zero padding, the final dimension of the array is bigger}
+        \PY{n}{y}  
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} array([ 6, 14, 34, 34,  8])
+\end{Verbatim}
+            
+    \subsubsection{2) Visually understanding the operation with
+"same"}\label{visually-understanding-the-operation-with-same}
+
+In this approach, we just add the zero to left (and top of the matrix in
+2D). That is, only the first 4 steps of "full" method:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        
+        \PY{n}{x}\PY{o}{=} \PY{p}{[}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}
+        \PY{n}{h}\PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{]}
+        
+        \PY{n}{y}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{convolve}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{h}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{same}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{}it is same as zero padding, but withgenerates same }
+        \PY{n}{y}  
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} array([ 6, 14, 34, 34])
+\end{Verbatim}
+            
+    \subsubsection{3) Visually understanding the operation with no padding
+(valid)}\label{visually-understanding-the-operation-with-no-padding-valid}
+
+In the last case we only applied the kernel when we had a compatible
+position on the h array, in some cases you want a dimensionality
+reduction. For this purpose, we simple ignore the steps tha would need
+padding:
+
+x{[}i{]} = {[}6 2{]} h{[}i{]} = {[}1 2 5 4{]}
+
+You have to invert the filter x, otherwise the operation would be
+cross-correlation. First step, (now without zero padding):
+[2  6]  
+ |  |  
+ V  V  
+[1  2  5  4]  
+    = 2 * 1 + 6 * 2 = 14 (the arrows represent the connection between the
+kernel and the input)
+
+Second step:
+   [2  6]  
+    |  |   
+    V  V  
+[1  2  5  4]  
+    = 2 * 2 + 6 * 5 = 34
+
+Third step:
+      [2  6]
+       |  |
+       V  V
+[1  2  5  4]  
+    = 2 * 5 + 6 * 4 = 34
+
+The result of the convolution for this mode would then be Y= {[}14 34
+34{]} = {[} First, second, third step{]}
+
+    Let's verify with numpy
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        
+        \PY{n}{x}\PY{o}{=} \PY{p}{[}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}
+        \PY{n}{h}\PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{]}
+        
+        \PY{n}{y}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{convolve}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{h}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{valid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{}we will understand why we used the argument valid in the next example}
+        \PY{n}{y}  
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} array([14, 34, 34])
+\end{Verbatim}
+            
+    \subsubsection{Convolution: 2D operation with Python
+(Numpy/Scipy)}\label{convolution-2d-operation-with-python-numpyscipy}
+
+    The 2D convolution operation is defined as:
+
+\[ I'= \sum\limits_{u,v} I(x-u,y-v)g(u,v) \]
+
+Below we will apply the equation to an image represented by a 3x3 matrix
+according to the function g = (-1 1). Please note that when we apply the
+kernel we always use its inversion.
+
+\$ I=
+
+\begin{bmatrix}
+     255          & 7      & 3     \\
+     212          & 240    & 4     \\
+     218          & 216    & 230
+\end{bmatrix}
+
+\textbackslash{} \$
+
+\$ g=
+
+\begin{bmatrix}
+     -1          & 1      
+\end{bmatrix}
+
+\textbackslash{} \$
+
+\$
+
+\begin{bmatrix}
+    \textbf{1}\cdot \textbf{0}      & \textbf{-1} \ast \textbf{255}  & 7      & 3     \\
+    0              & 212          & 240    & 4     \\
+    0              & 218          & 216    & 230
+\end{bmatrix}
+
+\rightarrow
+
+\begin{bmatrix}
+    \textbf{-255}  & 7      & 3     \\
+    212            & 240    & 4     \\
+    218            & 216    & 230
+\end{bmatrix}
+
+\textbackslash{} \$
+
+\$
+
+\begin{bmatrix}
+    \textbf{1}\ast \textbf{255}      & \textbf{-1} \ast \textbf{7}  & 3    \\
+    212          & 240    & 4     \\
+    218          & 216    & 230
+\end{bmatrix}
+
+\rightarrow
+
+\begin{bmatrix}
+    -255           & \textbf{248}      & 3     \\
+    212            & 240    & 4     \\
+    218            & 216    & 230
+\end{bmatrix}
+
+\textbackslash{} \$
+
+\$
+
+\begin{bmatrix}
+    255          & \textbf{1}\ast\textbf{7}  & \textbf{-1}\ast\textbf{3}    \\
+    212          & 240    & 4     \\
+    218          & 216    & 230
+\end{bmatrix}
+
+\rightarrow
+
+\begin{bmatrix}
+    -255           & 248      & \textbf{4}     \\
+    212            & 240      & 4     \\
+    218            & 216      & 230
+\end{bmatrix}
+
+\textbackslash{} \$
+
+\$
+
+\begin{bmatrix}
+    0              & 255          & 7          & 3     \\
+    \textbf{1}\ast \textbf{0}    & \textbf{-1} \ast \textbf{212}  & 240     & 4     \\
+    0              & 218          & 216    & 230
+\end{bmatrix}
+
+\rightarrow
+
+\begin{bmatrix}
+    \textbf{-255}  & 248    & 4     \\
+    -212            & 240    & 4     \\
+    218            & 216    & 230
+\end{bmatrix}
+
+\textbackslash{} \$
+
+    We don't have to finish the calculations, we have the computer at our
+side. So, let's see what is the code to proceede with this operation:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{signal} \PY{k}{as} \PY{n}{sg}
+         
+         \PY{n}{I}\PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{255}\PY{p}{,}   \PY{l+m+mi}{7}\PY{p}{,}  \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+m+mi}{212}\PY{p}{,} \PY{l+m+mi}{240}\PY{p}{,}  \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+m+mi}{218}\PY{p}{,} \PY{l+m+mi}{216}\PY{p}{,} \PY{l+m+mi}{230}\PY{p}{]}\PY{p}{,}\PY{p}{]}
+         
+         \PY{n}{g}\PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}
+         
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Without zero padding }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{sg}\PY{o}{.}\PY{n}{convolve}\PY{p}{(} \PY{n}{I}\PY{p}{,} \PY{n}{g}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{valid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} The \PYZsq{}valid\PYZsq{} argument states that the output consists only of those elements }
+         \PY{c+c1}{\PYZsh{} that do not rely on the zero\PYZhy{}padding.}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{With zero padding }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{sg}\PY{o}{.}\PY{n}{convolve}\PY{p}{(} \PY{n}{I}\PY{p}{,} \PY{n}{g}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Without zero padding 
+
+[[248   4]
+ [-28 236]
+ [  2 -14]] 
+
+With zero padding 
+
+[[-255  248    4    3]
+ [-212  -28  236    4]
+ [-218    2  -14  230]]
+
+    \end{Verbatim}
+
+    For a more difficult case where h= {[} {[}-1 1{]} , {[}2 3{]} {]}
+
+\$
+
+\begin{bmatrix}
+    \textbf{3}\ast \textbf{0}      & \textbf{2} \ast \textbf{0}     & 0      & 0     \\
+    \textbf{1}\ast \textbf{0}      & \textbf{-1} \ast \textbf{255}  & 7      & 3     \\
+    0              & 212          & 240    & 4     \\
+    0              & 218          & 216    & 230
+\end{bmatrix}
+
+\rightarrow
+
+\begin{bmatrix}
+    \textbf{-255}  & 7      & 3     \\
+    212            & 240    & 4     \\
+    218            & 216    & 230
+\end{bmatrix}
+
+\textbackslash{} \$
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{signal} \PY{k}{as} \PY{n}{sg}
+         
+         \PY{n}{I}\PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{255}\PY{p}{,}   \PY{l+m+mi}{7}\PY{p}{,}  \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+m+mi}{212}\PY{p}{,} \PY{l+m+mi}{240}\PY{p}{,}  \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+m+mi}{218}\PY{p}{,} \PY{l+m+mi}{216}\PY{p}{,} \PY{l+m+mi}{230}\PY{p}{]}\PY{p}{,}\PY{p}{]}
+         
+         \PY{n}{g}\PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}  \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[} \PY{l+m+mi}{2}\PY{p}{,}  \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}\PY{p}{]}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{With zero padding }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{sg}\PY{o}{.}\PY{n}{convolve}\PY{p}{(} \PY{n}{I}\PY{p}{,} \PY{n}{g}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} The output is the full discrete linear convolution of the inputs. }
+         \PY{c+c1}{\PYZsh{} It will use zero to complete the input matrix}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{With zero padding\PYZus{}same\PYZus{} }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{sg}\PY{o}{.}\PY{n}{convolve}\PY{p}{(} \PY{n}{I}\PY{p}{,} \PY{n}{g}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} The output is the full discrete linear convolution of the inputs. }
+         \PY{c+c1}{\PYZsh{} It will use zero to complete the input matrix}
+         
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Without zero padding }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{sg}\PY{o}{.}\PY{n}{convolve}\PY{p}{(} \PY{n}{I}\PY{p}{,} \PY{n}{g}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{valid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} The \PYZsq{}valid\PYZsq{} argument states that the output consists only of those elements }
+         \PY{c+c1}{\PYZsh{}that do not rely on the zero\PYZhy{}padding.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+With zero padding 
+
+[[-255  248    4    3]
+ [ 298  751  263   13]
+ [ 206 1118  714  242]
+ [ 436 1086 1108  690]] 
+
+With zero padding\_same\_ 
+
+[[-255  248    4]
+ [ 298  751  263]
+ [ 206 1118  714]] 
+
+Without zero padding 
+
+[[ 751  263]
+ [1118  714]]
+
+    \end{Verbatim}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+     \# Coding with TensorFlow
+
+    Numpy is great because it has high optmized matrix operations
+implemented in a backend using C/C++. However, if our goal is to work
+with DeepLearning, we need much more. TensorFlow does the same work, but
+instead of returning to Python everytime, it creates all the operations
+in the form of graphs and execute them once with the highly optimized
+backend.
+
+Suppose that you have two tensors:
+
+\begin{itemize}
+\tightlist
+\item
+  3x3 filter (4D tensor = {[}3,3,1,1{]} = {[}width, height, channels,
+  number of filters{]})
+\item
+  10x10 image (4D tensor = {[}1,10,10,1{]} = {[}batch size, width,
+  height, number of channels{]}
+\end{itemize}
+
+The output size for zero padding 'SAME' mode will be:\\
+* the same as input = 10x10
+
+The output size without zero padding 'VALID' mode:\\
+* input size - kernel dimension +1 = 10 -3 + 1 = 8 = 8x8
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k}{as} \PY{n+nn}{tf}
+         
+         \PY{c+c1}{\PYZsh{}Building graph}
+         
+         \PY{n+nb}{input} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{filter} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{op} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{conv2d}\PY{p}{(}\PY{n+nb}{input}\PY{p}{,} \PY{n+nb}{filter}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{VALID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{op2} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{conv2d}\PY{p}{(}\PY{n+nb}{input}\PY{p}{,} \PY{n+nb}{filter}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SAME}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Initialization and session}
+         \PY{n}{init} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{global\PYZus{}variables\PYZus{}initializer}\PY{p}{(}\PY{p}{)}
+         \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{sess}\PY{p}{:}
+             \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{init}\PY{p}{)}
+         
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Input }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{input}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Filter/Kernel }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{filter}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Result/Feature Map with valid positions }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{result} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{op}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{result}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Result/Feature Map with padding }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{result2} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{op2}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{result2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}ProgramData\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}h5py\textbackslash{}\_\_init\_\_.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from .\_conv import register\_converters as \_register\_converters
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Input 
+
+[[[[-2.58525601e-03]
+   [ 1.61041296e+00]
+   [-1.39527082e-01]
+   [-9.74619806e-01]
+   [-3.31774473e-01]
+   [ 2.03002501e+00]
+   [-6.77775264e-01]
+   [-8.01295713e-02]
+   [ 1.76055178e-01]
+   [-1.36341214e-01]]
+
+  [[-4.86007541e-01]
+   [ 1.81193173e-01]
+   [-4.90906954e-01]
+   [-9.37713563e-01]
+   [-4.90332961e-01]
+   [ 1.84311187e+00]
+   [-4.56127673e-01]
+   [-3.19038540e-01]
+   [-4.19905245e-01]
+   [-1.64199901e+00]]
+
+  [[ 2.99138576e-01]
+   [-1.48689663e+00]
+   [-7.22783983e-01]
+   [ 1.66871810e+00]
+   [-1.19433427e+00]
+   [ 2.58430409e+00]
+   [ 2.08616972e+00]
+   [ 1.26833010e+00]
+   [-1.86888412e-01]
+   [ 1.57294762e+00]]
+
+  [[ 7.73512006e-01]
+   [ 9.38036859e-01]
+   [ 2.26470327e+00]
+   [ 5.08771658e-01]
+   [-4.84095216e-01]
+   [ 6.90924674e-02]
+   [ 1.36477399e+00]
+   [-1.54624498e+00]
+   [-3.01550239e-01]
+   [ 7.16097295e-01]]
+
+  [[-1.08807564e+00]
+   [-1.70317459e+00]
+   [ 1.07103217e+00]
+   [-1.44825757e+00]
+   [-7.64846027e-01]
+   [ 1.01228285e+00]
+   [-1.65539324e+00]
+   [-1.61445117e+00]
+   [-1.38019311e+00]
+   [ 1.70656765e+00]]
+
+  [[ 5.22126913e-01]
+   [-7.20865488e-01]
+   [-4.41174954e-01]
+   [ 7.82477975e-01]
+   [ 2.40692973e-01]
+   [-1.48468590e+00]
+   [-1.94524527e-01]
+   [ 2.44837189e+00]
+   [ 1.36921123e-01]
+   [-1.10309505e+00]]
+
+  [[-6.99201822e-01]
+   [-2.63614148e-01]
+   [-4.21940237e-01]
+   [ 8.05548489e-01]
+   [-1.10904253e+00]
+   [ 7.65681148e-01]
+   [-1.82153136e-01]
+   [-9.74654794e-01]
+   [-7.46904671e-01]
+   [ 1.22599602e+00]]
+
+  [[-7.38158524e-01]
+   [-6.61415160e-01]
+   [ 1.78158581e+00]
+   [ 2.29841948e+00]
+   [-6.28482103e-01]
+   [ 6.00795031e-01]
+   [-2.13780713e+00]
+   [-4.66154516e-01]
+   [ 7.31172562e-02]
+   [-2.60047168e-01]]
+
+  [[-1.57404125e+00]
+   [ 2.88803291e+00]
+   [-3.73853803e-01]
+   [ 2.61543608e+00]
+   [-1.12757355e-01]
+   [ 1.71731627e+00]
+   [-3.66611294e-02]
+   [ 3.80291007e-02]
+   [ 2.45375231e-01]
+   [-1.02446055e+00]]
+
+  [[ 1.41285384e+00]
+   [-4.76477861e-01]
+   [-1.92249507e-01]
+   [ 4.77137864e-01]
+   [-6.70782030e-01]
+   [-2.14181447e+00]
+   [ 1.33612740e+00]
+   [ 3.62879485e-01]
+   [ 2.21539080e-01]
+   [-7.66663671e-01]]]] 
+
+Filter/Kernel 
+
+[[[[ 0.53262395]]
+
+  [[ 0.8822483 ]]
+
+  [[ 1.8466231 ]]]
+
+
+ [[[-0.16593094]]
+
+  [[ 1.1669399 ]]
+
+  [[ 0.26020205]]]
+
+
+ [[[ 0.4810789 ]]
+
+  [[ 0.9779369 ]]
+
+  [[ 0.3722011 ]]]] 
+
+Result/Feature Map with valid positions 
+
+[[[[-0.2530994 ]
+   [-2.7130806 ]
+   [-1.8475662 ]
+   [ 3.5965483 ]
+   [ 5.205349  ]
+   [ 3.1696575 ]
+   [ 1.6619396 ]
+   [ 0.00941199]]
+
+  [[-0.84596086]
+   [ 0.62465525]
+   [ 1.1690993 ]
+   [ 1.2703829 ]
+   [ 4.622004  ]
+   [ 3.1181524 ]
+   [-1.1823499 ]
+   [-4.3640304 ]]
+
+  [[-2.7220378 ]
+   [ 3.9603658 ]
+   [-2.2120047 ]
+   [ 2.9080577 ]
+   [ 6.018164  ]
+   [ 5.0051346 ]
+   [-3.1131992 ]
+   [ 2.0150776 ]]
+
+  [[ 3.2753708 ]
+   [ 4.105766  ]
+   [-0.6630444 ]
+   [-0.35812646]
+   [ 1.7922482 ]
+   [-4.1274557 ]
+   [-0.81079173]
+   [ 0.23527703]]
+
+  [[-1.8982196 ]
+   [-3.0678535 ]
+   [-0.8987073 ]
+   [-0.22419089]
+   [-4.246818  ]
+   [-3.4187052 ]
+   [-3.2485175 ]
+   [-0.20268497]]
+
+  [[-1.8127879 ]
+   [ 2.7122939 ]
+   [ 4.492164  ]
+   [-2.6264353 ]
+   [-1.0212485 ]
+   [ 0.99048895]
+   [-0.44928905]
+   [-1.2525443 ]]
+
+  [[ 0.35800186]
+   [ 5.758922  ]
+   [ 2.9968498 ]
+   [ 1.6932249 ]
+   [ 1.6091012 ]
+   [-3.4639149 ]
+   [-2.3954966 ]
+   [ 1.0578319 ]]
+
+  [[ 5.9894633 ]
+   [ 4.989252  ]
+   [ 5.025331  ]
+   [ 0.43681735]
+   [-3.6591928 ]
+   [-2.3334017 ]
+   [-0.22047028]
+   [-0.54465353]]]]
+
+
+Result/Feature Map with padding 
+
+[[[[ 0.00817149]
+   [ 1.6040503 ]
+   [-1.425561  ]
+   [-2.5361912 ]
+   [ 0.0581547 ]
+   [ 3.6443973 ]
+   [-0.82674515]
+   [-0.6229547 ]
+   [-0.99201185]
+   [-1.996094  ]]
+
+  [[ 2.1906643 ]
+   [-0.2530994 ]
+   [-2.7130806 ]
+   [-1.8475662 ]
+   [ 3.5965483 ]
+   [ 5.205349  ]
+   [ 3.1696575 ]
+   [ 1.6619396 ]
+   [ 0.00941199]
+   [-0.42461896]]
+
+  [[ 0.9735837 ]
+   [-0.84596086]
+   [ 0.62465525]
+   [ 1.1690993 ]
+   [ 1.2703829 ]
+   [ 4.622004  ]
+   [ 3.1181524 ]
+   [-1.1823499 ]
+   [-4.3640304 ]
+   [ 0.7494721 ]]
+
+  [[-3.033095  ]
+   [-2.7220378 ]
+   [ 3.9603658 ]
+   [-2.2120047 ]
+   [ 2.9080577 ]
+   [ 6.018164  ]
+   [ 5.0051346 ]
+   [-3.1131992 ]
+   [ 2.0150776 ]
+   [ 3.1788018 ]]
+
+  [[ 0.94404197]
+   [ 3.2753708 ]
+   [ 4.105766  ]
+   [-0.6630444 ]
+   [-0.35812646]
+   [ 1.7922482 ]
+   [-4.1274557 ]
+   [-0.81079173]
+   [ 0.23527703]
+   [ 1.6787536 ]]
+
+  [[-4.465247  ]
+   [-1.8982196 ]
+   [-3.0678535 ]
+   [-0.8987073 ]
+   [-0.22419089]
+   [-4.246818  ]
+   [-3.4187052 ]
+   [-3.2485175 ]
+   [-0.20268497]
+   [ 0.3001542 ]]
+
+  [[-2.7230926 ]
+   [-1.8127879 ]
+   [ 2.7122939 ]
+   [ 4.492164  ]
+   [-2.6264353 ]
+   [-1.0212485 ]
+   [ 0.99048895]
+   [-0.44928905]
+   [-1.2525443 ]
+   [ 0.43518746]]
+
+  [[-2.6015377 ]
+   [ 0.35800186]
+   [ 5.758922  ]
+   [ 2.9968498 ]
+   [ 1.6932249 ]
+   [ 1.6091012 ]
+   [-3.4639149 ]
+   [-2.3954966 ]
+   [ 1.0578319 ]
+   [-0.51559114]]
+
+  [[-1.753627  ]
+   [ 5.9894633 ]
+   [ 4.989252  ]
+   [ 5.025331  ]
+   [ 0.43681735]
+   [-3.6591928 ]
+   [-2.3334017 ]
+   [-0.22047028]
+   [-0.54465353]
+   [-2.0698524 ]]
+
+  [[ 5.4691477 ]
+   [ 0.17874193]
+   [ 6.0169992 ]
+   [ 2.3142726 ]
+   [ 3.0455608 ]
+   [-0.6530595 ]
+   [ 2.9615602 ]
+   [ 0.72653866]
+   [-1.6562331 ]
+   [-1.7045465 ]]]]
+
+    \end{Verbatim}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+     \# Convolution applied on images
+
+    Upload your own image (drag and drop to this window) and type its name
+on the input field on the next cell (press \emph{shift + enter}). The
+result of this pre-processing will be an image with only a greyscale
+channel.
+
+You can type \emph{bird.jpg} to use a default image
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} download standard image}
+             
+         \PY{k+kn}{import} \PY{n+nn}{requests}
+         \PY{n}{image\PYZus{}url} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://ibm.box.com/shared/static/cn7yt7z10j8rx6um1v9seagpgmzzxnlz.jpg}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{img\PYZus{}data} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{image\PYZus{}url}\PY{p}{)}\PY{o}{.}\PY{n}{content}
+         
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{image\PYZus{}name.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{handler}\PY{p}{:}
+             \PY{n}{handler}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{img\PYZus{}data}\PY{p}{)}
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{}Importing}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{signal}
+         \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{misc}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{PIL} \PY{k}{import} \PY{n}{Image}
+         
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Load image of your choice on the notebook}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Please type the name of your test image after uploading to }\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{your notebook (just drag and grop for upload. Please remember to }\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{type the extension of the file. Default: bird.jpg}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{im} \PY{o}{=} \PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bird.jpg}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} type here your image\PYZsq{}s name}
+         
+         \PY{c+c1}{\PYZsh{} uses the ITU\PYZhy{}R 601\PYZhy{}2 Luma transform (there are several }
+         \PY{c+c1}{\PYZsh{} ways to convert an image to grey scale)}
+         
+         \PY{n}{image\PYZus{}gr} \PY{o}{=} \PY{n}{im}\PY{o}{.}\PY{n}{convert}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{L}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}    
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ Original type: }\PY{l+s+si}{\PYZpc{}r}\PY{l+s+s2}{ }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{image\PYZus{}gr}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} convert image to a matrix with values from 0 to 255 (uint8) }
+         \PY{n}{arr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{image\PYZus{}gr}\PY{p}{)} 
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{After conversion to numerical representation: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ }\PY{l+s+si}{\PYZpc{}r}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{arr}\PY{p}{)} 
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Activating matplotlib for Ipython}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Plot image}
+         
+         \PY{n}{imgplot} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{arr}\PY{p}{)}
+         \PY{n}{imgplot}\PY{o}{.}\PY{n}{set\PYZus{}cmap}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{}you can experiment different colormaps (Greys,winter,autumn)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ Input image converted to gray scale: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{n}{imgplot}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Please type the name of your test image after uploading to your notebook (just drag and grop for upload. Please remember to type the extension of the file. Default: bird.jpg
+
+ Original type: <PIL.Image.Image image mode=L size=480x360 at 0x1573C357F28> 
+
+
+After conversion to numerical representation: 
+
+ array([[92, 92, 92, {\ldots}, 89, 89, 89],
+       [92, 92, 92, {\ldots}, 89, 89, 89],
+       [92, 92, 92, {\ldots}, 89, 89, 89],
+       {\ldots},
+       [79, 79, 79, {\ldots}, 73, 73, 73],
+       [79, 79, 79, {\ldots}, 73, 73, 73],
+       [79, 79, 79, {\ldots}, 73, 73, 73]], dtype=uint8)
+
+ Input image converted to gray scale: 
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_59_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Now, we will experiment using an edge detector kernel.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{kernel} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+                                 \PY{p}{[} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                                 \PY{p}{[} \PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                                 \PY{p}{[} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                                              \PY{p}{]}\PY{p}{)} 
+         
+         \PY{n}{grad} \PY{o}{=} \PY{n}{signal}\PY{o}{.}\PY{n}{convolve2d}\PY{p}{(}\PY{n}{arr}\PY{p}{,} \PY{n}{kernel}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{boundary}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{symm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GRADIENT MAGNITUDE \PYZhy{} Feature map}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{fig}\PY{p}{,} \PY{n}{aux} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{aux}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{absolute}\PY{p}{(}\PY{n}{grad}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+GRADIENT MAGNITUDE - Feature map
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} <matplotlib.image.AxesImage at 0x1573c91cc88>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    If we change the kernel and start to analyse the outputs we would be
+acting as a CNN. The difference is that a Neural Network do all this
+work automatically (the kernel adjustment using different weights). In
+addition, we can understand how biases affect the behaviour of feature
+maps
+
+    \emph{Please note that when you are dealing with most of the real
+applications of CNNs, you usually convert the pixels values to a range
+from 0 to 1. This process is called normalization.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n+nb}{type}\PY{p}{(}\PY{n}{grad}\PY{p}{)}
+         
+         \PY{n}{grad\PYZus{}biases} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{absolute}\PY{p}{(}\PY{n}{grad}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{100}
+         
+         \PY{n}{grad\PYZus{}biases}\PY{p}{[}\PY{n}{grad\PYZus{}biases} \PY{o}{\PYZgt{}} \PY{l+m+mi}{255}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{255}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GRADIENT MAGNITUDE \PYZhy{} Feature map}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{fig}\PY{p}{,} \PY{n}{aux} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{aux}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{absolute}\PY{p}{(}\PY{n}{grad\PYZus{}biases}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+GRADIENT MAGNITUDE - Feature map
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} <matplotlib.image.AxesImage at 0x1573c56cfd0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_66_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+     \# Conclusion
+
+This understanding of how convolutions work are the foundation of how
+Convolutional Neural Networks work. After this tuorial you are supposed
+to understand the underlying mathematical concepts and how to apply them
+using\textbar{} Python (numpy) and Tensorflow. The next setp is to
+extrapolate this knowledge to Machine Learning applications.
+
+    \subsection{Want to learn more?}\label{want-to-learn-more}
+
+Running deep learning programs usually needs a high performance
+platform. PowerAI speeds up deep learning and AI. Built on IBM's Power
+Systems, PowerAI is a scalable software platform that accelerates deep
+learning and AI with blazing performance for individual users or
+enterprises. The PowerAI platform supports popular machine learning
+libraries and dependencies including Tensorflow, Caffe, Torch, and
+Theano. You can download a \href{https://cocl.us/ML0120EN_PAI}{free
+version of PowerAI}.
+
+Also, you can use Data Science Experience to run these notebooks faster
+with bigger datasets. Data Science Experience is IBM's leading cloud
+solution for data scientists, built by data scientists. With Jupyter
+notebooks, RStudio, Apache Spark and popular libraries pre-packaged in
+the cloud, DSX enables data scientists to collaborate on their projects
+without having to install anything. Join the fast-growing community of
+DSX users today with a free account at
+\href{https://cocl.us/ML0120EN_DSX}{Data Science Experience}This is the
+end of this lesson. Hopefully, now you have a deeper and intuitive
+understanding regarding the LSTM model. Thank you for reading this
+notebook, and good luck on your studies.
+
+    \subsubsection{Thanks for completing this
+lesson!}\label{thanks-for-completing-this-lesson}
+
+    Created by Luis O. Silveira Martins , Erich Natsubori Sato
+
+, Saeed Aghabozorgi 
+
+    \section{REFERENCES}\label{references}
+
+    https://github.com/joanbruna/stat212b/blob/master/lec1.pdf\\
+http://deeplearning.stanford.edu/wiki/index.php/Feature\_extraction\_using\_convolution\\
+http://homepages.inf.ed.ac.uk/rbf/HIPR2/fourier.htm
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
